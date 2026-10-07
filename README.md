@@ -20,10 +20,9 @@ Engineered with 100% static client-side web technologies (HTML5, CSS3, ES6 JavaS
   - **MP3 Bitrates**: 320 kbps (Studio), 256 kbps, 192 kbps, 128 kbps.
   - **Multiple Containers**: MP3, Apple AAC (M4A), Lossless FLAC, WAV, and OPUS.
 
-- ⚡ **Multi-Tier Download Architecture**:
+- ⚡ **Dual Download Architecture**:
   1. **Direct API Downloader**: Connects to Cobalt media clusters and custom proxy backends with live progress bar and direct browser download trigger.
-  2. **1-Click Web Bridges**: Pre-populated instant converter portals (Cobalt, Y2Mate, SaveFrom, Loader.to 4K, YT1s, 10Downloader) with zero setup required.
-  3. **yt-dlp Pro Studio**: The gold standard for zero-throttling downloads. Live interactive command generator for **Windows (PowerShell / CMD)** and **macOS / Linux (Bash)**, plus 1-click downloadable `.bat` and `.sh` launcher scripts!
+  2. **yt-dlp Pro Studio**: The gold standard for zero-throttling downloads. Live interactive command generator for **Windows (PowerShell / CMD)** and **macOS / Linux (Bash)**, plus 1-click downloadable `.bat` and `.sh` launcher scripts!
 
 - 🔍 **Live Video Inspector & Embedded Player**:
   - Live metadata resolution (Title, Channel, Video ID) via CORS-friendly oEmbed.

@@ -55,8 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const actionModesCard = document.getElementById('actionModesCard');
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabPanes = document.querySelectorAll('.tab-pane');
-  const bridgesContainer = document.getElementById('bridgesContainer');
-
   // Direct Download Elements
   const btnStartDirectDownload = document.getElementById('btnStartDirectDownload');
   const btnDownloadText = document.getElementById('btnDownloadText');
@@ -69,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const directDownloadLink = document.getElementById('directDownloadLink');
   const btnCopyDownloadUrl = document.getElementById('btnCopyDownloadUrl');
   const downloadErrorBox = document.getElementById('downloadErrorBox');
-  const btnSwitchToBridges = document.getElementById('btnSwitchToBridges');
   const btnSwitchToYtdlp = document.getElementById('btnSwitchToYtdlp');
 
   // yt-dlp Studio Elements
@@ -92,11 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnSaveSettings = document.getElementById('btnSaveSettings');
   const btnTestBackendPing = document.getElementById('btnTestBackendPing');
   const backendPingResult = document.getElementById('backendPingResult');
-
-  const deployModal = document.getElementById('deployModal');
-  const btnOpenDeployModal = document.getElementById('btnOpenDeployModal');
-  const btnCloseDeploy = document.getElementById('btnCloseDeploy');
-  const btnCloseDeployFooter = document.getElementById('btnCloseDeployFooter');
 
   // History & Toast
   const btnClearHistory = document.getElementById('btnClearHistory');
@@ -257,7 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btnStartDirectDownload.addEventListener('click', handleStartDirectDownload);
 
     // Switch tabs on error recommendation
-    btnSwitchToBridges.addEventListener('click', () => switchTab('tab-bridges'));
     btnSwitchToYtdlp.addEventListener('click', () => switchTab('tab-ytdlp'));
 
     // yt-dlp Platforms
@@ -330,21 +321,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    btnOpenDeployModal.addEventListener('click', () => deployModal.classList.remove('hidden'));
-    btnCloseDeploy.addEventListener('click', () => deployModal.classList.add('hidden'));
-    btnCloseDeployFooter.addEventListener('click', () => deployModal.classList.add('hidden'));
-
     // Clear History
     btnClearHistory.addEventListener('click', () => {
       HistoryStore.clearHistory();
       showToast('History cleared', 'info');
     });
 
-    // Close modals on background click
-    [settingsModal, deployModal].forEach(modal => {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.add('hidden');
-      });
+    // Close modal on background click
+    settingsModal.addEventListener('click', (e) => {
+      if (e.target === settingsModal) settingsModal.classList.add('hidden');
     });
   }
 
@@ -447,9 +432,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ? `MP4 (${state.options.quality === 'max' ? 'Max 4K' : state.options.quality + 'p'})`
       : `${state.options.audioFormat.toUpperCase()} (${state.options.bitrate}kbps)`;
     btnDownloadText.textContent = `Download ${formatName}`;
-
-    // Update 1-Click Web Bridges
-    WebBridges.renderBridges(bridgesContainer, state.currentVideo, state.options);
 
     // Update yt-dlp command
     updateYtdlpCommand();
