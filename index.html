@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NovaRip Studio — YouTube MP3 & MP4 Ultra Downloader</title>
+  <meta name="description" content="High-performance, modern YouTube video & audio downloader. Download MP4 in up to 4K resolution and high-bitrate MP3 audio with direct API, web bridges, and yt-dlp studio. Designed for GitHub Pages.">
+  <meta name="keywords" content="youtube downloader, mp3 converter, mp4 4k, yt-dlp, github pages, audio extractor">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="theme-dark">
+  <!-- Dynamic Glow Background Canvas & Mesh -->
+  <div class="background-mesh" aria-hidden="true">
+    <div class="mesh-orb orb-1"></div>
+    <div class="mesh-orb orb-2"></div>
+    <div class="mesh-orb orb-3"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Navigation Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <img src="assets/logo.svg" alt="NovaRip Logo" class="brand-logo" width="40" height="40">
+        <div>
+          <div class="brand-title">NovaRip <span class="brand-badge">STUDIO</span></div>
+          <div class="brand-tagline">YouTube MP3 & MP4 Converter</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="engine-status" id="engineStatusIndicator" title="Multi-Engine Status">
+          <span class="status-dot online"></span>
+          <span class="status-text" id="engineStatusText">Engines Ready</span>
+        </div>
+        <button class="btn btn-outline btn-sm" id="btnOpenDeployModal" title="Learn how to deploy on GitHub Pages">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          Deploy Guide
+        </button>
+        <button class="btn btn-icon" id="btnOpenSettings" title="API & Backend Settings" aria-label="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Hero Header -->
+      <section class="hero-section">
+        <h1 class="hero-title">Download YouTube in <span class="gradient-text">Any Quality</span></h1>
+        <p class="hero-subtitle">Ultra-fast MP3 (up to 320kbps) & MP4 (up to 4K UHD). Fully optimized for GitHub Pages static hosting.</p>
+      </section>
+
+      <!-- URL Input Box -->
+      <div class="input-card">
+        <div class="input-glow-wrapper">
+          <div class="input-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <input 
+            type="text" 
+            id="videoUrlInput" 
+            class="url-input" 
+            placeholder="Paste YouTube video, Shorts, or Music URL here (e.g. https://youtu.be/...)"
+            autocomplete="off" 
+            spellcheck="false"
+          />
+          <div class="input-controls">
+            <button class="btn btn-ghost btn-sm" id="btnPasteUrl" title="Paste from clipboard">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+              Paste
+            </button>
+            <button class="btn btn-ghost btn-sm hidden" id="btnClearUrl" title="Clear input">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <button class="btn btn-primary" id="btnAnalyzeUrl">
+              <span>Inspect</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sample Demos -->
+        <div class="sample-links">
+          <span class="sample-label">Quick test samples:</span>
+          <button class="sample-chip" data-url="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Rick Astley (Remaster)</button>
+          <button class="sample-chip" data-url="https://www.youtube.com/watch?v=jNQXAC9IVRw">First YouTube Video</button>
+          <button class="sample-chip" data-url="https://www.youtube.com/shorts/35E6gQxYmF4">YouTube Short</button>
+        </div>
+      </div>
+
+      <!-- Loading / Analyzing State -->
+      <div class="analyzing-banner hidden" id="analyzingBanner">
+        <div class="spinner"></div>
+        <span id="analyzingText">Fetching video metadata from YouTube...</span>
+      </div>
+
+      <!-- Video Details & Metadata Preview Card -->
+      <div class="preview-card hidden" id="videoPreviewCard">
+        <div class="preview-thumbnail-container">
+          <img id="previewThumbnail" src="" alt="Video thumbnail" class="preview-thumbnail" />
+          <div class="thumbnail-overlay">
+            <button class="play-preview-btn" id="btnToggleEmbed" title="Preview video in player">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <span class="badge duration-badge" id="previewBadge">HD 60fps</span>
+          </div>
+        </div>
+
+        <div class="preview-meta">
+          <div class="preview-header">
+            <h2 class="video-title" id="previewTitle">Video Title Loading...</h2>
+            <div class="channel-info">
+              <span class="channel-name" id="previewAuthor">Channel Name</span>
+              <span class="meta-dot">&bull;</span>
+              <span class="video-id-badge" id="previewVideoId">ID: dQw4w9WgXcQ</span>
+            </div>
+          </div>
+
+          <!-- In-App Embedded Player (Collapsible) -->
+          <div class="embed-player-wrapper hidden" id="embedPlayerWrapper">
+            <iframe id="embedIframe" src="" title="YouTube player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <!-- Format & Mode Selection Tabs -->
+          <div class="format-selection-zone">
+            <!-- Format Switcher: Video vs Audio -->
+            <div class="format-type-toggle">
+              <button class="type-btn active" id="typeBtnVideo" data-type="video">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                <span>MP4 Video</span>
+              </button>
+              <button class="type-btn" id="typeBtnAudio" data-type="audio">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                <span>MP3 Audio</span>
+              </button>
+            </div>
+
+            <!-- Video Quality Options -->
+            <div class="quality-grid" id="videoQualitySection">
+              <label class="quality-label">Choose Resolution:</label>
+              <div class="chip-group" id="videoQualityChips">
+                <button class="chip" data-quality="max">
+                  <span class="chip-main">Max (Best)</span>
+                  <span class="chip-sub">Auto Best</span>
+                </button>
+                <button class="chip" data-quality="2160">
+                  <span class="chip-main">4K 2160p</span>
+                  <span class="chip-sub">Ultra HD</span>
+                </button>
+                <button class="chip" data-quality="1440">
+                  <span class="chip-main">2K 1440p</span>
+                  <span class="chip-sub">Quad HD</span>
+                </button>
+                <button class="chip active" data-quality="1080">
+                  <span class="chip-main">1080p</span>
+                  <span class="chip-sub">Full HD</span>
+                </button>
+                <button class="chip" data-quality="720">
+                  <span class="chip-main">720p</span>
+                  <span class="chip-sub">HD Fast</span>
+                </button>
+                <button class="chip" data-quality="480">
+                  <span class="chip-main">480p</span>
+                  <span class="chip-sub">Standard</span>
+                </button>
+                <button class="chip" data-quality="360">
+                  <span class="chip-main">360p</span>
+                  <span class="chip-sub">Data Saver</span>
+                </button>
+              </div>
+
+              <div class="codec-row">
+                <label for="codecSelect" class="codec-label">Video Codec:</label>
+                <select id="codecSelect" class="select-input">
+                  <option value="h264" selected>H.264 (Maximum Compatibility - MP4)</option>
+                  <option value="av1">AV1 (Next-Gen High Quality)</option>
+                  <option value="vp9">VP9 (High Quality YouTube Native)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Audio Quality Options (Hidden when video is selected) -->
+            <div class="quality-grid hidden" id="audioQualitySection">
+              <label class="quality-label">Choose Audio Bitrate & Quality:</label>
+              <div class="chip-group" id="audioQualityChips">
+                <button class="chip active" data-bitrate="320">
+                  <span class="chip-main">320 kbps</span>
+                  <span class="chip-sub">Studio Hi-Fi</span>
+                </button>
+                <button class="chip" data-bitrate="256">
+                  <span class="chip-main">256 kbps</span>
+                  <span class="chip-sub">Very High</span>
+                </button>
+                <button class="chip" data-bitrate="192">
+                  <span class="chip-main">192 kbps</span>
+                  <span class="chip-sub">Standard</span>
+                </button>
+                <button class="chip" data-bitrate="128">
+                  <span class="chip-main">128 kbps</span>
+                  <span class="chip-sub">Compact</span>
+                </button>
+              </div>
+
+              <div class="codec-row">
+                <label for="audioFormatSelect" class="codec-label">Audio Container:</label>
+                <select id="audioFormatSelect" class="select-input">
+                  <option value="mp3" selected>MP3 (Universal Audio)</option>
+                  <option value="m4a">M4A (Apple AAC - Crisp Quality)</option>
+                  <option value="opus">OPUS (Highest Efficiency)</option>
+                  <option value="wav">WAV (Uncompressed PCM)</option>
+                  <option value="flac">FLAC (Lossless Audio)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Execution Modes (Tabs) -->
+      <div class="action-modes-card hidden" id="actionModesCard">
+        <div class="tabs-nav">
+          <button class="tab-btn active" data-tab="tab-direct">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Direct API Downloader</span>
+          </button>
+          <button class="tab-btn" data-tab="tab-bridges">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <span>1-Click Web Bridges</span>
+          </button>
+          <button class="tab-btn" data-tab="tab-ytdlp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            <span>yt-dlp Pro Studio</span>
+          </button>
+        </div>
+
+        <div class="tab-content-container">
+          <!-- TAB 1: Direct API Downloader -->
+          <div class="tab-pane active" id="tab-direct">
+            <div class="pane-header">
+              <div>
+                <h3 class="pane-title">Direct In-Browser API Downloader</h3>
+                <p class="pane-desc">Processes the request through open Cobalt/Piped serverless endpoints or your custom configured instance.</p>
+              </div>
+              <div class="active-endpoint-badge">
+                <span class="badge-dot"></span>
+                <span id="activeEndpointName">Auto-Engine Cluster</span>
+              </div>
+            </div>
+
+            <!-- Trigger Button -->
+            <div class="action-trigger-area">
+              <button class="btn btn-action-big" id="btnStartDirectDownload">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span id="btnDownloadText">Download Selected Media Now</span>
+              </button>
+            </div>
+
+            <!-- Download Progress and Status Area -->
+            <div class="status-box hidden" id="directStatusBox">
+              <div class="status-header">
+                <span class="status-msg" id="statusMessage">Connecting to media engine...</span>
+                <span class="status-percent" id="statusPercent">0%</span>
+              </div>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="statusProgressFill"></div>
+              </div>
+              <div class="status-sub" id="statusSubMessage">Resolving YouTube stream chunks and muxing audio/video...</div>
+            </div>
+
+            <!-- Success Box -->
+            <div class="result-box success hidden" id="downloadSuccessBox">
+              <div class="result-icon success-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="result-details">
+                <div class="result-title">Stream Successfully Extracted!</div>
+                <div class="result-info" id="successFileInfo">Ready for download. If browser didn't start automatically, click below:</div>
+                <div class="result-buttons">
+                  <a href="#" id="directDownloadLink" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                    <span>Direct Download File</span>
+                  </a>
+                  <button class="btn btn-outline btn-sm" id="btnCopyDownloadUrl">Copy Stream Link</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Error Notice with Smart Engine Recommendation -->
+            <div class="result-box error hidden" id="downloadErrorBox">
+              <div class="result-icon error-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div class="result-details">
+                <div class="result-title">Public API Blocked / Rate-Limited by YouTube</div>
+                <div class="result-info" id="errorMessageText">
+                  Public instances frequently hit YouTube IP throttling. Use our <strong>1-Click Web Bridges</strong> tab or <strong>yt-dlp Pro Studio</strong> for guaranteed 100% instant download!
+                </div>
+                <div class="result-buttons">
+                  <button class="btn btn-primary btn-sm" id="btnSwitchToBridges">Open 1-Click Bridges</button>
+                  <button class="btn btn-outline btn-sm" id="btnSwitchToYtdlp">Open yt-dlp Studio</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: 1-Click Web Bridges -->
+          <div class="tab-pane" id="tab-bridges">
+            <div class="pane-header">
+              <div>
+                <h3 class="pane-title">1-Click Fast Web Bridges</h3>
+                <p class="pane-desc">Zero-setup instant download bridges with your video pre-loaded. Perfect for GitHub Pages static hosting!</p>
+              </div>
+            </div>
+
+            <div class="bridges-grid" id="bridgesContainer">
+              <!-- Dynamically populated bridges -->
+            </div>
+          </div>
+
+          <!-- TAB 3: yt-dlp Pro Studio -->
+          <div class="tab-pane" id="tab-ytdlp">
+            <div class="pane-header">
+              <div>
+                <h3 class="pane-title">yt-dlp Pro Terminal Studio</h3>
+                <p class="pane-desc">The industry gold standard. Zero throttling, full 4K 60fps & 320kbps MP3 fidelity with metadata & thumbnail embedding.</p>
+              </div>
+              <div class="platform-selector">
+                <button class="platform-btn active" data-plat="powershell">Windows (PowerShell)</button>
+                <button class="platform-btn" data-plat="cmd">Windows (CMD)</button>
+                <button class="platform-btn" data-plat="bash">macOS / Linux (Bash)</button>
+              </div>
+            </div>
+
+            <!-- Pro yt-dlp Options -->
+            <div class="ytdlp-options">
+              <label class="checkbox-container">
+                <input type="checkbox" id="ytdlpThumb" checked>
+                <span class="checkmark"></span>
+                <span>Embed Thumbnail in file</span>
+              </label>
+              <label class="checkbox-container">
+                <input type="checkbox" id="ytdlpMeta" checked>
+                <span class="checkmark"></span>
+                <span>Embed Metadata & Tags</span>
+              </label>
+              <label class="checkbox-container">
+                <input type="checkbox" id="ytdlpSubs">
+                <span class="checkmark"></span>
+                <span>Download Subtitles (.srt)</span>
+              </label>
+            </div>
+
+            <!-- Command Output Display -->
+            <div class="code-terminal">
+              <div class="terminal-bar">
+                <div class="terminal-dots">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                </div>
+                <span class="terminal-title" id="terminalTitle">PowerShell One-Liner</span>
+                <button class="btn-copy-code" id="btnCopyYtdlpCmd" title="Copy command to clipboard">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span>Copy</span>
+                </button>
+              </div>
+              <pre class="terminal-body"><code id="ytdlpCommandCode">yt-dlp ...</code></pre>
+            </div>
+
+            <div class="script-downloads">
+              <button class="btn btn-outline btn-sm" id="btnDownloadBatScript">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download .bat Script (Windows 1-Click)
+              </button>
+              <button class="btn btn-outline btn-sm" id="btnDownloadShScript">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download .sh Script (Mac/Linux)
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- History & Bookmarks Section -->
+      <section class="history-section">
+        <div class="history-header">
+          <div class="history-title-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <h3 class="history-title">Recent Downloads & Queue</h3>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="btnClearHistory">Clear All</button>
+        </div>
+        <div class="history-list" id="historyList">
+          <div class="history-empty" id="historyEmpty">
+            No downloads yet. Enter a YouTube link above to start downloading!
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay hidden" id="settingsModal">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3 class="modal-title">API & Backend Settings</h3>
+          <button class="btn-close-modal" id="btnCloseSettings">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="customCobaltUrl">Custom Cobalt Instance URL:</label>
+            <input type="text" id="customCobaltUrl" class="text-input" placeholder="https://api.your-cobalt-instance.com" />
+            <span class="field-hint">If you host your own Cobalt Docker or Railway instance, enter the URL here for unthrottled downloads.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="customWorkerUrl">Cloudflare Worker Proxy URL:</label>
+            <input type="text" id="customWorkerUrl" class="text-input" placeholder="https://youtube-worker.yourname.workers.dev" />
+            <span class="field-hint">Use our bundled <code class="inline-code">backend/worker.js</code> template to deploy a free dedicated proxy.</span>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-outline btn-sm" id="btnTestBackendPing">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Test Endpoints Latency
+            </button>
+            <span id="backendPingResult" class="ping-result-badge"></span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="btnSaveSettings">Save Settings</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GitHub Pages Deployment Guide Modal -->
+    <div class="modal-overlay hidden" id="deployModal">
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <div class="modal-title-with-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            <h3>Deploying to GitHub Pages (2 Minutes)</h3>
+          </div>
+          <button class="btn-close-modal" id="btnCloseDeploy">&times;</button>
+        </div>
+        <div class="modal-body deploy-guide-body">
+          <p class="guide-intro">This web app is 100% static (HTML, CSS, JS) and is already pre-configured with a ready-to-use GitHub Actions workflow (<code class="inline-code">.github/workflows/deploy.yml</code>)!</p>
+          
+          <div class="guide-steps">
+            <div class="step-card">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h4>Create a GitHub Repository</h4>
+                <p>Go to <a href="https://github.com/new" target="_blank" rel="noopener">github.com/new</a> and create a public or private repository (e.g. <code>youtube-downloader</code>).</p>
+              </div>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h4>Push your project files</h4>
+                <p>Open terminal in this project folder and run:</p>
+                <div class="code-snippet">
+                  <code>git init<br>git add .<br>git commit -m "Initial commit - NovaRip Studio"<br>git branch -M main<br>git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO.git<br>git push -u origin main</code>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h4>Enable GitHub Pages</h4>
+                <p>In your GitHub repository, go to <strong>Settings</strong> &rarr; <strong>Pages</strong>.</p>
+                <p>Under <strong>Build and deployment &gt; Source</strong>, choose <strong>GitHub Actions</strong> (or select <strong>Deploy from branch: main / root</strong>).</p>
+              </div>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <h4>Your Live Site is Ready!</h4>
+                <p>Your application is immediately accessible at:</p>
+                <div class="highlight-url">https://&lt;your-username&gt;.github.io/&lt;your-repo&gt;/</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="btnCloseDeployFooter">Got It!</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <p>NovaRip Studio &bull; Built with pure HTML5, CSS3 & ES6 JavaScript &bull; Ready for GitHub Pages Static Hosting</p>
+        <p class="footer-disclaimer">Please respect copyright laws and YouTube Terms of Service. For personal educational use only.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/bridges.js"></script>
+  <script src="js/ytdlp.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

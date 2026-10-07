@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="50%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="100" height="100" rx="24" fill="#0f172a"/>
+  <rect x="2" y="2" width="96" height="96" rx="22" stroke="url(#grad1)" stroke-width="2" stroke-opacity="0.6"/>
+  <!-- Download Arrow & Waveform -->
+  <path d="M50 24 V58 M36 44 L50 58 L64 44" stroke="url(#grad1)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <!-- Audio wave arc / container -->
+  <path d="M26 68 C 34 76, 66 76, 74 68" stroke="#06b6d4" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <circle cx="50" cy="74" r="3" fill="#ec4899"/>
+</svg>
